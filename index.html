@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Simple, delicious recipes for everyday cooking.">
+  <title>Gather &amp; Graze — Everyday Recipes</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #26352c;
+      --muted: #647168;
+      --green: #355b45;
+      --cream: #fbf8f0;
+      --paper: #fffefa;
+      --line: #e8e4d8;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .wrap {
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .header-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      color: var(--green);
+      font-family: Georgia, serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 26px;
+    }
+
+    nav a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      color: var(--green);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .hero {
+      padding: 76px 0 64px;
+      background: #e9eee2;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.15;
+    }
+
+    h1 {
+      max-width: 700px;
+      margin: 0 auto 16px;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      letter-spacing: -0.055em;
+    }
+
+    .hero p:last-child {
+      max-width: 560px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    main {
+      padding: 58px 0 76px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 26px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .recipe-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--paper);
+      box-shadow: 0 8px 22px rgb(38 53 44 / 5%);
+    }
+
+    .recipe-art {
+      min-height: 150px;
+      display: grid;
+      place-items: center;
+      font-size: 4rem;
+    }
+
+    .art-salad {
+      background: #e6edda;
+    }
+
+    .art-pasta {
+      background: #f3e7d4;
+    }
+
+    .art-soup {
+      background: #e8e7d8;
+    }
+
+    .recipe-content {
+      padding: 22px;
+    }
+
+    .recipe-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .recipe-content h3 {
+      margin: 0 0 8px;
+      font-size: 1.45rem;
+      letter-spacing: -0.03em;
+    }
+
+    .recipe-content > p {
+      min-height: 48px;
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
+
+    .recipe-content h4 {
+      margin: 18px 0 6px;
+      color: var(--green);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .recipe-content ul,
+    .recipe-content ol {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 0.87rem;
+    }
+
+    .recipe-content li + li {
+      margin-top: 4px;
+    }
+
+    footer {
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .recipe-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .recipe-content > p {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wrap {
+        width: min(100% - 28px, 1080px);
+      }
+
+      .header-inner {
+        min-height: 68px;
+      }
+
+      nav {
+        gap: 14px;
+      }
+
+      nav a {
+        font-size: 0.8rem;
+      }
+
+      .hero {
+        padding: 58px 0 52px;
+      }
+
+      .section-heading {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#home">Gather &amp; Graze</a>
+      <nav aria-label="Main navigation">
+        <a href="#recipes">Recipes</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="wrap">
+      <p class="eyebrow">Good food, shared simply</p>
+      <h1>A little inspiration for your table.</h1>
+      <p>Fresh, unfussy recipes made for real life. Pick a favorite, gather a few ingredients, and enjoy something delicious.</p>
+    </div>
+  </section>
+
+  <main class="wrap" id="recipes">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">From our kitchen</p>
+        <h2>Recipes to make today</h2>
+      </div>
+      <p>Three easy ideas, all under 40 minutes.</p>
+    </div>
+
+    <div class="recipe-grid">
+      <article class="recipe-card">
+        <div class="recipe-art art-salad" aria-hidden="true">🥗</div>
+        <div class="recipe-content">
+          <div class="recipe-meta"><span>Fresh &amp; bright</span><span>15 min · Serves 2</span></div>
+          <h3>Green Goddess Grain Bowl</h3>
+          <p>Herby, crunchy, and filling—an easy lunch that makes the most of fresh greens.</p>
+          <h4>You'll need</h4>
+          <ul>
+            <li>2 cups cooked quinoa</li>
+            <li>1 ripe avocado and 1 cucumber</li>
+            <li>2 cups leafy greens</li>
+            <li>¼ cup plain yogurt, lemon, and fresh herbs</li>
+          </ul>
+          <h4>Make it</h4>
+          <ol>
+            <li>Whisk yogurt with lemon juice and chopped herbs.</li>
+            <li>Divide quinoa, greens, cucumber, and avocado between bowls.</li>
+            <li>Spoon the dressing over top and season to taste.</li>
+          </ol>
+        </div>
+      </article>
+
+      <article class="recipe-card">
+        <div class="recipe-art art-pasta" aria-hidden="true">🍝</div>
+        <div class="recipe-content">
+          <div class="recipe-meta"><span>Weeknight favorite</span><span>25 min · Serves 4</span></div>
+          <h3>One-Pan Tomato Pasta</h3>
+          <p>A cozy, low-fuss dinner with sweet tomatoes, garlic, and a little parmesan.</p>
+          <h4>You'll need</h4>
+          <ul>
+            <li>12 oz pasta</li>
+            <li>1 pint cherry tomatoes</li>
+            <li>3 garlic cloves and 3½ cups vegetable broth</li>
+            <li>Olive oil, parmesan, and basil</li>
+          </ul>
+          <h4>Make it</h4>
+          <ol>
+            <li>Add pasta, tomatoes, sliced garlic, broth, and a drizzle of oil to a deep pan.</li>
+            <li>Bring to a boil, then simmer, stirring often, until pasta is tender.</li>
+            <li>Finish with parmesan, torn basil, and black pepper.</li>
+          </ol>
+        </div>
+      </article>
+
+      <article class="recipe-card">
+        <div class="recipe-art art-soup" aria-hidden="true">🥣</div>
+        <div class="recipe-content">
+          <div class="recipe-meta"><span>Comfort food</span><span>35 min · Serves 4</span></div>
+          <h3>Golden Carrot &amp; Ginger Soup</h3>
+          <p>Silky, gently spiced soup that brings a bit of sunshine to any day.</p>
+          <h4>You'll need</h4>
+          <ul>
+            <li>1½ lb carrots, peeled and chopped</li>
+            <li>1 onion and a 1-inch piece of fresh ginger</li>
+            <li>4 cups vegetable broth</li>
+            <li>½ cup coconut milk, salt, and pepper</li>
+          </ul>
+          <h4>Make it</h4>
+          <ol>
+            <li>Soften chopped onion in a pot with a little oil, then add grated ginger.</li>
+            <li>Add carrots and broth. Simmer until the carrots are very tender.</li>
+            <li>Blend until smooth, stir in coconut milk, and season to taste.</li>
+          </ol>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer id="about">
+    <div class="wrap">Gather &amp; Graze · Simple recipes, made to be shared.</div>
+  </footer>
+</body>
+</html>
